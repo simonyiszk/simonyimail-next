@@ -1,7 +1,7 @@
-import { TbCircleCheck, TbCircleX } from 'react-icons/tb';
-
+import { ErrorDisplay } from '@/components/error-display';
 import { Loading } from '@/components/loading';
 import { SheetHeaders } from '@/components/sheet-selector/sheet-headers';
+import { SuccessDisplay } from '@/components/success-display';
 import { useSpreadsheet } from '@/hooks/use-spreadsheet';
 
 interface SheetPreviewProps {
@@ -11,23 +11,10 @@ interface SheetPreviewProps {
 export function SheetPreview({ sheetId }: SheetPreviewProps) {
   const { data, error, isLoading } = useSpreadsheet(sheetId);
   if (isLoading) return <Loading />;
-  if (!data || error)
-    return (
-      <div className='flex gap-3 items-center'>
-        <span className='text-red-500 text-xl'>
-          <TbCircleX />
-        </span>
-        <p>{error.message ?? 'Hiba történt'}</p>
-      </div>
-    );
+  if (!data || error) return <ErrorDisplay text={error.message ?? 'Hiba történt'} />;
   return (
     <>
-      <div className='flex gap-3 items-center'>
-        <span className='text-green-500 text-xl'>
-          <TbCircleCheck />
-        </span>
-        <p className='truncate'>{data.properties.title}</p>
-      </div>
+      <SuccessDisplay text={data.properties.title} />
       <SheetHeaders sheetId={sheetId} />
     </>
   );

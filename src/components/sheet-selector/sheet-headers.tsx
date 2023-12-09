@@ -1,7 +1,7 @@
-import { TbCircleCheck, TbCircleX } from 'react-icons/tb';
-
 import { Chip } from '@/components/chip';
+import { ErrorDisplay } from '@/components/error-display';
 import { Loading } from '@/components/loading';
+import { SuccessDisplay } from '@/components/success-display';
 import { useSpreadsheetValues } from '@/hooks/use-spreadsheet-values';
 
 interface SheetHeadersProps {
@@ -9,27 +9,16 @@ interface SheetHeadersProps {
 }
 
 export function SheetHeaders({ sheetId }: SheetHeadersProps) {
-  const { data, error } = useSpreadsheetValues(sheetId);
-  if (error)
-    return (
-      <div className='flex gap-3 items-center'>
-        <span className='text-red-500 text-xl'>
-          <TbCircleX />
-        </span>
-        <p>{error.message ?? 'Hiba történt'}</p>
-      </div>
-    );
-  if (!data) return <Loading />;
+  const { data, isLoading, error } = useSpreadsheetValues(sheetId);
+  if (isLoading) return <Loading />;
+  if (!data || error) return <ErrorDisplay text={error.message ?? 'Hiba történt'} />;
   return (
-    <div className='flex gap-3'>
-      <span className='text-green-500 text-xl'>
-        <TbCircleCheck />
-      </span>
+    <SuccessDisplay>
       <div className='flex gap-1 flex-wrap'>
         {data.values[0].map((header: string) => (
           <Chip key={header}>{header}</Chip>
         ))}
       </div>
-    </div>
+    </SuccessDisplay>
   );
 }
