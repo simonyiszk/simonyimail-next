@@ -1,17 +1,10 @@
 'use client';
 
-import axios from 'axios';
 import useSWR from 'swr';
 
+import { axiosGet } from '@/fetcher/axios-functions';
 import { Spreadsheet } from '@/types/spreasheet.type';
 
 export function useSpreadsheet(id: string) {
-  return useSWR(
-    ['spreadsheet', id],
-    async () => {
-      const response = await axios.get<Spreadsheet>('/api/spreadsheet/' + id);
-      return response.data;
-    },
-    { revalidateOnFocus: false }
-  );
+  return useSWR('/api/spreadsheet/' + id, axiosGet<Spreadsheet>(), { revalidateOnFocus: false });
 }
