@@ -1,12 +1,12 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { Navbar } from '@/components/navbar';
 import { SheetSelector } from '@/components/sheet-selector/sheet-selector';
 
 export default function MainPage() {
   return (
     <main>
-      <Header />
+      <Navbar />
       <SheetSelector />
     </main>
   );

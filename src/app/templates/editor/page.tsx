@@ -1,12 +1,12 @@
 'use client';
 
 import { EditorPage } from '@/components/editor-page';
-import { Header } from '@/components/header';
+import { Navbar } from '@/components/navbar';
 
 export default function Home() {
   return (
     <main className='h-screen w-full grid grid-rows-[auto_1fr]'>
-      <Header />
+      <Navbar />
       <EditorPage />
     </main>
   );

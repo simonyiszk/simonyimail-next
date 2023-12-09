@@ -6,14 +6,40 @@ body {
   @apply bg-slate-100;
 }
 
-button {
+.button {
   @apply text-gray-700 py-1 px-2 rounded-md border-2 border-gray-100 hover:bg-gray-100;
 }
 
+button {
+  @apply button;
+}
+
+.button.primary,
 button.primary {
   @apply bg-green-500 text-white hover:bg-green-600 active:bg-green-700 border-green-100;
 }
 
 input {
   @apply text-gray-700 py-1 px-2 rounded border-2 border-gray-100 focus:outline-blue-200;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold text-gray-700;
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+h2 {
+  @apply text-xl;
+}
+
+label {
+  @apply text-gray-500 block mb-1;
 }

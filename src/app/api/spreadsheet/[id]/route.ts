@@ -2,6 +2,7 @@ import axios, { isAxiosError } from 'axios';
 import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { InternalServerErrorResponse, OkResponse } from '@/server-utils/responses';
 import { Spreadsheet } from '@/types/spreasheet.type';
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
@@ -12,11 +13,11 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
         Authorization: `Bearer ${(session as any).accessToken}`,
       },
     });
-    return Response.json(response.data);
+    return OkResponse(response.data);
   } catch (e) {
     if (isAxiosError(e)) {
       return Response.json({ error: e.message }, { status: e.response?.status ?? 500 });
     }
-    return Response.json({ error: 'Error' }, { status: 500 });
+    return InternalServerErrorResponse(JSON.stringify(e));
   }
 }

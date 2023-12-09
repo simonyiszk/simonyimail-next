@@ -1,15 +1,11 @@
 import axios from 'axios';
 
-export const axiosGet =
-  <T>() =>
-  async (url: string) => {
-    const response = await axios.get<T>(url);
-    return response.data;
-  };
+export const axiosGet = async <T>(url: string) => {
+  const response = await axios.get<T>(url);
+  return response.data;
+};
 
-export const axiosPost =
-  <T>() =>
-  async (url: string, data: T) => {
-    const response = await axios.post<T>(url, data);
-    return response.data;
-  };
+export const axiosPost = async <TResponse, TBody>(url: string, data: { arg: TBody }) => {
+  const response = await axios.post<TResponse>(url, data.arg);
+  return response.data;
+};
