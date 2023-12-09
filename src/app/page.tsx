@@ -1,13 +1,13 @@
 'use client';
 
-import { EditorPage } from '@/components/editor-page';
 import { Header } from '@/components/header';
+import { SheetSelector } from '@/components/sheet-selector/sheet-selector';
 
-export default function Home() {
+export default function MainPage() {
   return (
-    <main className='h-screen w-full grid grid-rows-[auto_1fr]'>
+    <main>
       <Header />
-      <EditorPage />
+      <SheetSelector />
     </main>
   );
 }

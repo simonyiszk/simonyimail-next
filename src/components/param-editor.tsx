@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 
-import { Param } from '@/types/param.types';
+import { Param } from '@/types/param.type';
 
 interface ParamEditorProps {
   keys: string[];

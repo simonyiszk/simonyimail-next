@@ -4,7 +4,7 @@ import { FormattedEditor } from '@/components/formatted-editor';
 import { ParamEditor } from '@/components/param-editor';
 import { HorizontalSplitPane } from '@/components/split-pane/horizontal-split-pane';
 import { VerticalSplitPane } from '@/components/split-pane/vertical-split-pane';
-import { Param } from '@/types/param.types';
+import { Param } from '@/types/param.type';
 import { getHtmlForMjml } from '@/utils/convert-mjml';
 
 export function EditorPage() {
