@@ -1,12 +1,14 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Google from 'next-auth/providers/google';
 
+import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, NEXTAUTH_SECRET } from '@/config/env';
+
 export const authOptions: NextAuthOptions = {
-  secret: 'process.env.NEXTAUTH_SECRET',
+  secret: NEXTAUTH_SECRET,
   providers: [
     Google({
-      clientId: '619312822879-ena4eoidapg6c0m4unqfuop0smml1rqq.apps.googleusercontent.com',
-      clientSecret: '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',
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
           scope:

@@ -12,6 +12,7 @@
     "@uiw/react-textarea-code-editor": "^3.0.2",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
+    "env-var": "^7.4.1",
     "html-prettify": "^1.0.7",
     "mjml-browser": "^4.14.1",
     "next": "14.0.4",
