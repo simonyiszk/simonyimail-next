@@ -1,6 +1,7 @@
 import { TbCircleCheck, TbCircleX } from 'react-icons/tb';
 
 import { Loading } from '@/components/loading';
+import { SheetHeaders } from '@/components/sheet-selector/sheet-headers';
 import { useSpreadsheet } from '@/hooks/use-spreadsheet';
 
 interface SheetPreviewProps {
@@ -20,11 +21,14 @@ export function SheetPreview({ sheetId }: SheetPreviewProps) {
       </div>
     );
   return (
-    <div className='flex gap-3 items-center'>
-      <span className='text-green-500 text-xl'>
-        <TbCircleCheck />
-      </span>
-      <p className='truncate'>{data.properties.title}</p>
-    </div>
+    <>
+      <div className='flex gap-3 items-center'>
+        <span className='text-green-500 text-xl'>
+          <TbCircleCheck />
+        </span>
+        <p className='truncate'>{data.properties.title}</p>
+      </div>
+      <SheetHeaders sheetId={sheetId} />
+    </>
   );
 }

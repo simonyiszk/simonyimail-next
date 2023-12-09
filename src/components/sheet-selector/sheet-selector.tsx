@@ -12,7 +12,7 @@ export function SheetSelector() {
   };
 
   return (
-    <div className='flex flex-col gap-2 bg-white rounded-md p-5 mx-auto w-80 max-w-full shadow-sm my-5'>
+    <div className='flex flex-col gap-4 bg-white rounded-md p-5 mx-auto w-80 max-w-full shadow-sm my-5'>
       <h2>Táblázat kiválasztása</h2>
       <input ref={inputRef} placeholder='Azonosító' />
       <button onClick={onSearch} className='primary'>
