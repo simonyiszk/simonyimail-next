@@ -6,6 +6,10 @@ body {
   @apply bg-slate-100;
 }
 
+main {
+  @apply mx-auto container my-10 px-5;
+}
+
 .button {
   @apply text-gray-700 py-1 px-2 rounded-md border-2 border-gray-100 hover:bg-gray-100;
 }

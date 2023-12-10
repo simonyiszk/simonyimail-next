@@ -20,19 +20,16 @@ export default function TemplateCreatePage() {
     }
   };
   return (
-    <>
-      <Navbar />
-      <main className='flex flex-col gap-4 bg-white rounded-md p-5 mx-auto w-80 max-w-full shadow-sm my-5'>
-        <h3>Új sablon</h3>
-        <div>
-          <label htmlFor='template-name'>Név</label>
-          <input id='template-name' ref={inputRef} placeholder='Az én sablonom' className='w-full' />
-        </div>
-        <button className='primary' onClick={onSubmit}>
-          {isMutating && <Loading />}Mentés
-        </button>
-        {error && <ErrorDisplay text={error.message} />}
-      </main>
-    </>
+    <main className='flex flex-col gap-4 bg-white rounded-md p-5 mx-auto w-80 max-w-full shadow-sm my-5'>
+      <h3>Új sablon</h3>
+      <div>
+        <label htmlFor='template-name'>Név</label>
+        <input id='template-name' ref={inputRef} placeholder='Az én sablonom' className='w-full' />
+      </div>
+      <button className='primary' onClick={onSubmit}>
+        {isMutating && <Loading />}Mentés
+      </button>
+      {error && <ErrorDisplay text={error.message} />}
+    </main>
   );
 }
