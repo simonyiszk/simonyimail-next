@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { Card } from '@/components/card';
 import { SheetPreview } from '@/components/sheet-selector/sheet-preview';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
+import { Target } from '@/types/target.type';
+import { convertSpreadsheetToObject } from '@/utils/sheet-to-object';
 
 interface SheetSelectorProps {
-  onSheetValuesSelected: (sheetValues: SpreadsheetValues) => void;
+  onSheetValuesSelected: (targets: Target[]) => void;
 }
 
 export function SheetSelector({ onSheetValuesSelected }: SheetSelectorProps) {
@@ -16,14 +18,24 @@ export function SheetSelector({ onSheetValuesSelected }: SheetSelectorProps) {
     setSheetId(inputRef.current?.value);
   };
 
+  const handleValuesSelect = useCallback(
+    (sheetValues: SpreadsheetValues) => {
+      const targets: Target[] = convertSpreadsheetToObject(sheetValues.values);
+      onSheetValuesSelected(targets);
+    },
+    [onSheetValuesSelected]
+  );
+
   return (
-    <Card className='mx-auto w-96 max-w-full my-5'>
+    <Card>
       <h2>Táblázat kiválasztása</h2>
-      <input ref={inputRef} placeholder='Azonosító' />
-      <button onClick={onSearch} className='primary'>
-        Keresés
-      </button>
-      {sheetId && <SheetPreview sheetId={sheetId} onSheetValuesSelected={onSheetValuesSelected} />}
+      <div className='flex gap-3'>
+        <input className='flex-1' ref={inputRef} placeholder='Azonosító' />
+        <button onClick={onSearch} className='primary'>
+          Keresés
+        </button>
+      </div>
+      {sheetId && <SheetPreview sheetId={sheetId} onSheetValuesSelected={handleValuesSelect} />}
     </Card>
   );
 }

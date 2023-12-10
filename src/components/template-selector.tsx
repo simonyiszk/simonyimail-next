@@ -9,15 +9,15 @@ import { Select } from '@/components/select';
 import { SuccessDisplay } from '@/components/success-display';
 import { WarningDisplay } from '@/components/warning-display';
 import { useTemplates } from '@/hooks/use-templates';
-import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
+import { Target } from '@/types/target.type';
 import { getParams } from '@/utils/parameter.utils';
 
 interface TemplateSelectorProps {
-  spreadsheetValues: SpreadsheetValues;
+  targets: Target[];
   onSelectedTemplate: (template: Template) => void;
 }
 
-export function TemplateSelector({ spreadsheetValues, onSelectedTemplate }: TemplateSelectorProps) {
+export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelectorProps) {
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>();
   const { data, isLoading, error } = useTemplates();
   const options = data?.map((template) => ({ value: template.id, label: template.name }));
@@ -29,9 +29,9 @@ export function TemplateSelector({ spreadsheetValues, onSelectedTemplate }: Temp
   const difference = useMemo(() => {
     if (!selectedTemplate) return undefined;
     const params = getParams(selectedTemplate.mjml);
-    const columns = spreadsheetValues?.values?.[0] ?? [];
+    const columns = targets[0] ? Object.keys(targets[0]) : [];
     return compareParamsWithColumns([...params], columns);
-  }, [selectedTemplate, spreadsheetValues]);
+  }, [selectedTemplate, targets]);
 
   useEffect(() => {
     if (selectedTemplate && difference?.remainingParams.length === 0) {
@@ -40,7 +40,7 @@ export function TemplateSelector({ spreadsheetValues, onSelectedTemplate }: Temp
   }, [selectedTemplate, difference, onSelectedTemplate]);
 
   return (
-    <Card className='mx-auto w-96 max-w-full my-5'>
+    <Card>
       <h2>Sablon kiválasztása</h2>
       {isLoading && <Loading />}
       {error && <ErrorDisplay text={error.message ?? 'Hiba történt'} />}

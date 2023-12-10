@@ -8,7 +8,7 @@ import { HorizontalSplitPane } from '@/components/split-pane/horizontal-split-pa
 import { VerticalSplitPane } from '@/components/split-pane/vertical-split-pane';
 import { TemplateSaver } from '@/components/template-saver';
 import { Param } from '@/types/param.type';
-import { getParams } from '@/utils/parameter.utils';
+import { getParams, replaceParams } from '@/utils/parameter.utils';
 
 interface EditorPageProps {
   template: Template;
@@ -35,12 +35,4 @@ export function EditorPage({ template }: EditorPageProps) {
       <TemplateSaver templateId={template.id} mjml={codeValue} />
     </div>
   );
-}
-
-function replaceParams(html: string, params: Param[]): string {
-  let newHtml = html;
-  params.forEach((param) => {
-    newHtml = newHtml.replaceAll(`{{${param.key}}}`, param.value);
-  });
-  return newHtml;
 }

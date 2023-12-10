@@ -6,12 +6,13 @@ import { TbCaretUpDown, TbCheck } from 'react-icons/tb';
 type ComboboxOption = { value: string; label: string };
 
 interface SelectProps {
+  defaultValue?: ComboboxOption;
   options: ComboboxOption[];
   onChange: (value: string) => void;
 }
 
-export function Select({ options, onChange }: SelectProps) {
-  const [selected, setSelected] = useState(options[0]);
+export function Select({ options, onChange, defaultValue }: SelectProps) {
+  const [selected, setSelected] = useState(defaultValue ?? options[0]);
   const [query, setQuery] = useState('');
 
   const filteredOptions =
@@ -23,9 +24,10 @@ export function Select({ options, onChange }: SelectProps) {
   };
 
   useEffect(() => {
-    setSelected(options[0]);
-    onChange(options[0].value);
+    setSelected(defaultValue ?? options[0]);
+    onChange(defaultValue ? defaultValue.value : options[0].value);
   }, []);
+
   return (
     <Combobox value={selected} onChange={handleChange}>
       <div className='relative'>
