@@ -1,9 +1,14 @@
-'use client';
 import { useRef, useState } from 'react';
 
+import { Card } from '@/components/card';
 import { SheetPreview } from '@/components/sheet-selector/sheet-preview';
+import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 
-export function SheetSelector() {
+interface SheetSelectorProps {
+  onSheetValuesSelected: (sheetValues: SpreadsheetValues) => void;
+}
+
+export function SheetSelector({ onSheetValuesSelected }: SheetSelectorProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [sheetId, setSheetId] = useState<string>();
 
@@ -12,13 +17,13 @@ export function SheetSelector() {
   };
 
   return (
-    <div className='flex flex-col gap-4 bg-white rounded-md p-5 mx-auto w-80 max-w-full shadow-sm my-5'>
+    <Card className='mx-auto w-96 max-w-full my-5'>
       <h2>Táblázat kiválasztása</h2>
       <input ref={inputRef} placeholder='Azonosító' />
       <button onClick={onSearch} className='primary'>
         Keresés
       </button>
-      {sheetId && <SheetPreview sheetId={sheetId} />}
-    </div>
+      {sheetId && <SheetPreview sheetId={sheetId} onSheetValuesSelected={onSheetValuesSelected} />}
+    </Card>
   );
 }

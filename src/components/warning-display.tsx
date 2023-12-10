@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { HTMLAttributes, ReactNode } from 'react';
-import { TbCircleX } from 'react-icons/tb';
+import { TbAlertTriangle } from 'react-icons/tb';
 
-type ErrorDisplayProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
+type WarningDisplayProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
   (
     | {
         text: string;
@@ -12,11 +12,11 @@ type ErrorDisplayProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
       }
   );
 
-export function ErrorDisplay({ className, ...props }: ErrorDisplayProps) {
+export function WarningDisplay({ className, ...props }: WarningDisplayProps) {
   return (
     <div className={clsx('flex gap-3', className)} {...props}>
-      <span className='text-red-500 text-xl'>
-        <TbCircleX />
+      <span className='text-orange-500 text-xl'>
+        <TbAlertTriangle />
       </span>
       {'text' in props && <p>{props.text}</p>}
       {'children' in props && props.children}
