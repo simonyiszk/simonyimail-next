@@ -18,8 +18,10 @@ export function VerticalSplitPane({ bottomChild, topChild, className, ...props }
 
   const handleDragMove = (e: MouseEvent) => {
     const containerHeight = containerRef.current?.clientHeight ?? 1;
-    const newTopHeight = `calc(${(e.clientY / containerHeight) * 100}% - 10px)`;
-    const newBottomHeight = `calc(${100 - (e.clientY / containerHeight) * 100}% - 10px)`;
+    const diff = window.innerHeight - containerHeight;
+    const clientY = e.clientY - diff;
+    const newTopHeight = `calc(${(clientY / containerHeight) * 100}% - 10px)`;
+    const newBottomHeight = `calc(${100 - (clientY / containerHeight) * 100}% - 10px)`;
     setTopHeight(newTopHeight);
     setBottomHeight(newBottomHeight);
   };
