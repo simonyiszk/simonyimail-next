@@ -18,7 +18,7 @@ export default async function TemplatePage({ params }: { params: { id: string } 
   return (
     <main>
       <h1>{template.name}</h1>
-      <EmailRenderer mjml={template.mjml} />
+      <EmailRenderer className='rounded-md mt-10' mjml={template.mjml} />
     </main>
   );
 }
