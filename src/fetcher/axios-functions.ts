@@ -9,3 +9,8 @@ export const axiosPost = async <TResponse, TBody>(url: string, data: { arg: TBod
   const response = await axios.post<TResponse>(url, data.arg);
   return response.data;
 };
+
+export const axiosPut = async <TResponse, TBody>(url: string, data: { arg: TBody }) => {
+  const response = await axios.put<TResponse>(url, data.arg);
+  return response.data;
+};

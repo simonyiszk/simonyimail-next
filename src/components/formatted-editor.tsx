@@ -3,11 +3,12 @@ import prettify from 'html-prettify';
 import { useEffect, useState } from 'react';
 
 interface CodeEditorProps {
+  defaultValue?: string;
   onChange: (e: string) => void;
 }
 
-export function FormattedEditor({ onChange }: CodeEditorProps) {
-  const [codeValue, setCodeValue] = useState('');
+export function FormattedEditor({ onChange, defaultValue = '' }: CodeEditorProps) {
+  const [codeValue, setCodeValue] = useState(defaultValue);
 
   const format = () => {
     const html = prettify(codeValue);

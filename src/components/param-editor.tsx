@@ -27,7 +27,7 @@ export function ParamEditor({ keys, onChange }: ParamEditorProps) {
     setParams([...existingParams, ...newParams]);
   }, [keys]);
   return (
-    <div className='max-h-full overflow-y-auto p-2'>
+    <div className='h-full overflow-y-auto p-2'>
       {params.length === 0 && (
         <p className='text-opacity-50'>Adj a kódhoz paramétereket dupla kapcsos zárójelekkel: {'{{parameter}}'}</p>
       )}
@@ -39,6 +39,7 @@ export function ParamEditor({ keys, onChange }: ParamEditorProps) {
               id={param.key + '-input'}
               type='text'
               value={param.value}
+              className='w-full'
               onChange={(e) => setParam(param.key, e.target.value)}
             />
           </Fragment>
