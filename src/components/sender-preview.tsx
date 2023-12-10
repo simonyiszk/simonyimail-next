@@ -1,4 +1,5 @@
 import { Template } from '@prisma/client';
+import mjml2html from 'mjml-browser';
 import { useState } from 'react';
 import { TbEye } from 'react-icons/tb';
 
@@ -6,6 +7,7 @@ import { Card } from '@/components/card';
 import { EmailRenderer } from '@/components/email-renderer';
 import { Modal } from '@/components/modal';
 import { Pagination } from '@/components/pagination';
+import { SingleEmailSend } from '@/components/single-email-send';
 import { TargetWithEmail } from '@/types/target.type';
 import { replaceParams } from '@/utils/parameter.utils';
 
@@ -35,6 +37,7 @@ function TargetPreview({ target, template }: TargetPreviewProps) {
     template.mjml,
     Object.entries(target).map(([key, value]) => ({ key, value }))
   );
+  const html = mjml2html(mjmlWithParams).html;
   return (
     <div>
       {Object.entries(target).map(([key, value]) => (
@@ -43,15 +46,18 @@ function TargetPreview({ target, template }: TargetPreviewProps) {
           <p className='truncate'>{value}</p>
         </div>
       ))}
-      <Modal
-        button={(onOpen) => (
-          <button className='mt-3' onClick={onOpen}>
-            <TbEye /> Sablon előnézet
-          </button>
-        )}
-      >
-        <EmailRenderer mjml={mjmlWithParams} />
-      </Modal>
+      <div className='flex justify-between items-center mt-3'>
+        <Modal
+          button={(onOpen) => (
+            <button onClick={onOpen}>
+              <TbEye /> Sablon előnézet
+            </button>
+          )}
+        >
+          <EmailRenderer mjml={mjmlWithParams} />
+        </Modal>
+        <SingleEmailSend to={target.email} html={html} />
+      </div>
     </div>
   );
 }
