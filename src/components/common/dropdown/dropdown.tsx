@@ -11,7 +11,9 @@ export function Dropdown({ button, children }: DropdownProps) {
   return (
     <div className='relative'>
       <Menu>
-        <Menu.Button as={Button}>{button}</Menu.Button>
+        <Menu.Button as={Button} className='px-2'>
+          {button}
+        </Menu.Button>
         <Menu.Items>
           <div className='absolute top-full right-0 rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col'>
             {children}

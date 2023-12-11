@@ -15,17 +15,13 @@ type ButtonProps = (
 };
 
 export function Button({ variant, className, ...props }: ButtonProps) {
-  const baseClassName =
-    'text-gray-700 py-2 px-4 rounded-md border-2 border-gray-100 hover:bg-gray-100 flex justify-center gap-1 items-center disabled:cursor-not-allowed disabled:opacity-50';
-  const primaryClassName = 'bg-green-500 text-white hover:bg-green-600 active:bg-green-700 border-green-100';
-
   if ('href' in props) {
     return (
       <Link
         className={clsx(
-          baseClassName,
+          'button',
           {
-            [primaryClassName]: variant === 'primary',
+            primary: variant === 'primary',
           },
           className
         )}
@@ -36,9 +32,8 @@ export function Button({ variant, className, ...props }: ButtonProps) {
   return (
     <button
       className={clsx(
-        baseClassName,
         {
-          [primaryClassName]: variant === 'primary',
+          primary: variant === 'primary',
         },
         className
       )}
