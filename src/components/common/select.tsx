@@ -18,9 +18,12 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
   const filteredOptions =
     query === '' ? options : options.filter((option) => option.label.toLowerCase().includes(query.toLowerCase()));
 
-  const handleChange = (option: ComboboxOption) => {
-    setSelected(option);
-    onChange(option.value);
+  const handleChange = (value: string) => {
+    const selectedOption = options.find((option) => option.value === value);
+    if (!selectedOption) return;
+    setQuery('');
+    setSelected(selectedOption);
+    onChange(selectedOption.value);
   };
 
   useEffect(() => {
@@ -29,17 +32,17 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
   }, []);
 
   return (
-    <Combobox value={selected} onChange={handleChange}>
+    <Combobox value={selected.value} onChange={handleChange}>
       <div className='relative'>
-        <Combobox.Button className='flex items-center w-full'>
+        <Combobox.Button className='flex items-center w-full hover:bg-white'>
           <Combobox.Input
             className='flex-1 border-none outline-none bg-transparent focus:outline-none'
-            displayValue={(option: { label: string; value: string }) => option.label}
+            displayValue={(value: string) => options.find((option) => option.value === value)?.label ?? ''}
             onChange={(event) => setQuery(event.target.value)}
           />
           <TbCaretUpDown className='h-5 w-5 text-slate-500' />
         </Combobox.Button>
-        <Combobox.Options className='absolute top-full right-0 rounded-md border-2 border-slate-100 bg-slate-100 overflow-hidden gap-y-0.5 flex flex-col w-full'>
+        <Combobox.Options className='absolute top-full mt-1 right-0 shadow-md rounded-md border-2 border-slate-100 bg-slate-100 overflow-hidden gap-y-0.5 flex flex-col w-full'>
           {filteredOptions.length === 0 && query !== '' ? (
             <div className='cursor-default select-none px-4 py-2 text-gray-700 bg-white'>Nincs találat.</div>
           ) : (
@@ -48,13 +51,13 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
                 key={option.value}
                 className={({ selected, active }) =>
                   clsx(`flex items-center gap-2 px-4 py-2 cursor-pointer`, {
-                    'bg-green-500 text-white': selected && !active,
-                    'bg-green-600 text-white': active && selected,
+                    'bg-gray-400 text-white': selected && !active,
+                    'bg-gray-500 text-white': active && selected,
                     'bg-white': !selected && !active,
                     'bg-gray-100': !selected && active,
                   })
                 }
-                value={option}
+                value={option.value}
               >
                 {({ selected }) => (
                   <>
