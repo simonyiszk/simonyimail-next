@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { UserDisplay } from '@/components/user-display';
+import { UserDisplay } from '@/components/flow/sender-preview/user-display';
 
 export function Navbar() {
   return (

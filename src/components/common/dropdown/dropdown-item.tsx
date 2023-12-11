@@ -1,6 +1,5 @@
 import { Menu } from '@headlessui/react';
 import Link from 'next/link';
-import { HTMLAttributes } from 'react';
 import { IconType } from 'react-icons';
 
 type DropdownItemProps = {

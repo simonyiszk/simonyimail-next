@@ -1,8 +1,7 @@
 'use client';
 
-import { EditorPage } from '@/components/editor-page';
-import { Loading } from '@/components/loading';
-import { Navbar } from '@/components/navbar';
+import { Loading } from '@/components/common/loading';
+import { EditorPage } from '@/components/editor/editor-page';
 import { useTemplate } from '@/hooks/use-template';
 
 export default function Home({ params }: { params: { id: string } }) {

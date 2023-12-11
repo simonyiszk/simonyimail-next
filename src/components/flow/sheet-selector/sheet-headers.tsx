@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
-import { Chip } from '@/components/chip';
-import { ErrorDisplay } from '@/components/error-display';
-import { Loading } from '@/components/loading';
-import { SuccessDisplay } from '@/components/success-display';
+import { Chip } from '@/components/common/chip';
+import { Loading } from '@/components/common/loading';
+import { ErrorDisplay } from '@/components/common/status-display/error-display';
+import { SuccessDisplay } from '@/components/common/status-display/success-display';
 import { useSpreadsheetValues } from '@/hooks/use-spreadsheet-values';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 

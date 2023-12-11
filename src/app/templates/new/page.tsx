@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 
-import { ErrorDisplay } from '@/components/error-display';
-import { Loading } from '@/components/loading';
+import { Loading } from '@/components/common/loading';
+import { ErrorDisplay } from '@/components/common/status-display/error-display';
 import { Navbar } from '@/components/navbar';
 import { useCreateTemplate } from '@/hooks/use-create-template';
 

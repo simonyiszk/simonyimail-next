@@ -1,6 +1,6 @@
 import { TbCloudCheck, TbCloudX } from 'react-icons/tb';
 
-import { Loading } from '@/components/loading';
+import { Loading } from '@/components/common/loading';
 import { useDebouncedCallback } from '@/hooks/use-debounced-callback';
 import { useSaveTemplate } from '@/hooks/use-save-template';
 
@@ -10,9 +10,9 @@ interface TemplateSaverProps {
 }
 
 export function TemplateSaver({ templateId, mjml }: TemplateSaverProps) {
-  const { data, error, trigger, isMutating } = useSaveTemplate(templateId);
+  const { error, trigger, isMutating } = useSaveTemplate(templateId);
   useDebouncedCallback(mjml, 2000, (mjml) => trigger({ mjml }));
-  let child = null;
+  let child;
   if (isMutating) {
     child = <Loading className='text-4xl' />;
   } else if (error) {

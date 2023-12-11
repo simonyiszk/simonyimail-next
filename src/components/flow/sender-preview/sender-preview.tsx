@@ -3,11 +3,11 @@ import mjml2html from 'mjml-browser';
 import { useState } from 'react';
 import { TbEye } from 'react-icons/tb';
 
-import { Card } from '@/components/card';
+import { Card } from '@/components/common/card';
+import { Modal } from '@/components/common/modal';
+import { Pagination } from '@/components/common/pagination';
 import { EmailRenderer } from '@/components/email-renderer';
-import { Modal } from '@/components/modal';
-import { Pagination } from '@/components/pagination';
-import { SingleEmailSend } from '@/components/single-email-send';
+import { SingleEmailSend } from '@/components/flow/sender-preview/single-email-send';
 import { TargetWithEmail } from '@/types/target.type';
 import { replaceParams } from '@/utils/parameter.utils';
 
@@ -37,7 +37,8 @@ function TargetPreview({ target, template }: TargetPreviewProps) {
     template.mjml,
     Object.entries(target).map(([key, value]) => ({ key, value }))
   );
-  const html = mjml2html(mjmlWithParams).html;
+
+  // const html = mjml2html(mjmlWithParams).html;
   return (
     <div>
       {Object.entries(target).map(([key, value]) => (
@@ -54,9 +55,10 @@ function TargetPreview({ target, template }: TargetPreviewProps) {
             </button>
           )}
         >
-          <EmailRenderer mjml={mjmlWithParams} />
+          asd
+          {/*<EmailRenderer mjml={mjmlWithParams} />*/}
         </Modal>
-        <SingleEmailSend to={target.email} html={html} />
+        {/*<SingleEmailSend to={target.email} html={html} />*/}
       </div>
     </div>
   );

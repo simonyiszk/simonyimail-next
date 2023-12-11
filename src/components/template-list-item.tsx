@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { HTMLAttributes } from 'react';
 import { TbDots, TbEdit, TbTrash } from 'react-icons/tb';
 
-import { Dropdown } from '@/components/dropdown/dropdown';
-import { DropdownButtonItem, DropdownLinkItem } from '@/components/dropdown/dropdown-item';
+import { Dropdown } from '@/components/common/dropdown/dropdown';
+import { DropdownButtonItem, DropdownLinkItem } from '@/components/common/dropdown/dropdown-item';
 
 interface TemplateListItemProps extends HTMLAttributes<HTMLDivElement> {
   template: Template;

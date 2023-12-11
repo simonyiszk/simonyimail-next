@@ -1,7 +1,7 @@
-import { ErrorDisplay } from '@/components/error-display';
-import { Loading } from '@/components/loading';
-import { SheetHeaders } from '@/components/sheet-selector/sheet-headers';
-import { SuccessDisplay } from '@/components/success-display';
+import { Loading } from '@/components/common/loading';
+import { ErrorDisplay } from '@/components/common/status-display/error-display';
+import { SuccessDisplay } from '@/components/common/status-display/success-display';
+import { SheetHeaders } from '@/components/flow/sheet-selector/sheet-headers';
 import { useSpreadsheet } from '@/hooks/use-spreadsheet';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 

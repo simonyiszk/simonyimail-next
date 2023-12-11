@@ -1,5 +1,5 @@
-import { Card } from '@/components/card';
-import { Select } from '@/components/select';
+import { Card } from '@/components/common/card';
+import { Select } from '@/components/common/select';
 
 interface EmailFieldSelectorProps {
   headers: string[];

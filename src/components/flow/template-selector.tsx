@@ -1,13 +1,13 @@
 import { Template } from '@prisma/client';
 import { useEffect, useMemo, useState } from 'react';
 
-import { Card } from '@/components/card';
-import { Chip } from '@/components/chip';
-import { ErrorDisplay } from '@/components/error-display';
-import { Loading } from '@/components/loading';
-import { Select } from '@/components/select';
-import { SuccessDisplay } from '@/components/success-display';
-import { WarningDisplay } from '@/components/warning-display';
+import { Card } from '@/components/common/card';
+import { Chip } from '@/components/common/chip';
+import { Loading } from '@/components/common/loading';
+import { Select } from '@/components/common/select';
+import { ErrorDisplay } from '@/components/common/status-display/error-display';
+import { SuccessDisplay } from '@/components/common/status-display/success-display';
+import { WarningDisplay } from '@/components/common/status-display/warning-display';
 import { useTemplates } from '@/hooks/use-templates';
 import { Target } from '@/types/target.type';
 import { getParams } from '@/utils/parameter.utils';

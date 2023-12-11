@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 
-import { Loading } from '@/components/loading';
+import { Loading } from '@/components/common/loading';
 import { useSendEmail } from '@/hooks/use-send-email';
 
 interface SingleEmailSendProps {

@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { Card } from '@/components/card';
-import { SheetPreview } from '@/components/sheet-selector/sheet-preview';
+import { Card } from '@/components/common/card';
+import { SheetPreview } from '@/components/flow/sheet-selector/sheet-preview';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 import { Target } from '@/types/target.type';
 import { convertSpreadsheetToObject } from '@/utils/sheet-to-object';
