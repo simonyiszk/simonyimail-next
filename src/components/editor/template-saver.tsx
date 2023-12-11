@@ -21,8 +21,6 @@ export function TemplateSaver({ templateId, mjml }: TemplateSaverProps) {
     child = <TbCloudCheck className='text-green-500' />;
   }
   return (
-    <div className='bg-white flex items-center justify-center w-20 h-20 shadow-md rounded-md text-4xl absolute bottom-10 right-10'>
-      {child}
-    </div>
+    <div className='bg-white flex items-center justify-center w-20 h-20 shadow-md rounded-md text-4xl'>{child}</div>
   );
 }
