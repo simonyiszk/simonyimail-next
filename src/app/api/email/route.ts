@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   try {
     const response = await axios.post<unknown>(
       'https://gmail.googleapis.com/gmail/v1/users/me/messages/send/',
-      { raw: composeEmail(body.to, body.html) },
+      { raw: composeEmail(body.to, body.html, body.subject) },
       {
         headers: {
           Authorization: `Bearer ${(session as any).accessToken}`,
@@ -42,10 +42,11 @@ export async function POST(req: Request) {
 function parseAndValidate(body: object): SendEmailDto {
   if (!body.hasOwnProperty('to')) throw new Error('Missing to');
   if (!body.hasOwnProperty('html')) throw new Error('Missing html');
+  if (!body.hasOwnProperty('subject')) throw new Error('Missing subject');
   return body as SendEmailDto;
 }
 
-function composeEmail(to: string, html: string) {
-  const emailBody = `To: ${to}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
+function composeEmail(to: string, html: string, subject: string) {
+  const emailBody = `To: ${to}\nSubject: ${subject}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
   return Buffer.from(emailBody).toString('base64');
 }

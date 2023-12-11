@@ -2,6 +2,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { TbX } from 'react-icons/tb';
 
+import { Button } from '@/components/common/button';
+
 interface ModalProps {
   button: (onOpen: () => void) => React.ReactNode;
   children: React.ReactNode;
@@ -48,9 +50,9 @@ export function Modal({ button, children }: ModalProps) {
                 <Dialog.Panel className='w-full max-h-full flex-1 max-w-4xl transform overflow-hidden flex flex-col rounded-2xl bg-white p-6 text-left align-middle shadow-xl'>
                   <div className='flex-1 overflow-auto'>{children}</div>
                   <div className='mt-5 flex justify-end'>
-                    <button onClick={closeModal}>
+                    <Button onClick={closeModal}>
                       <TbX /> Bezár
-                    </button>
+                    </Button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

@@ -2,6 +2,8 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import prettify from 'html-prettify';
 import { useEffect, useState } from 'react';
 
+import { Button } from '@/components/common/button';
+
 interface CodeEditorProps {
   defaultValue?: string;
   onChange: (e: string) => void;
@@ -37,9 +39,9 @@ export function FormattedEditor({ onChange, defaultValue = '' }: CodeEditorProps
           }}
         />
       </div>
-      <button className='absolute top-5 right-5 bg-white' onClick={format}>
+      <Button className='absolute top-5 right-5 bg-white' onClick={format}>
         Format
-      </button>
+      </Button>
     </div>
   );
 }

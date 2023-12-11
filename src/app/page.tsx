@@ -4,6 +4,7 @@ import { Template } from '@prisma/client';
 import { useMemo, useState } from 'react';
 
 import { EmailFieldSelector } from '@/components/flow/email-field-selector';
+import { SendAll } from '@/components/flow/send-all';
 import { SenderPreview } from '@/components/flow/sender-preview/sender-preview';
 import { SheetSelector } from '@/components/flow/sheet-selector/sheet-selector';
 import { SubjectInput } from '@/components/flow/subject-input';
@@ -30,7 +31,10 @@ export default function MainPage() {
       )}
       {rawTargets && targetsWithEmail && <SubjectInput onChange={setSubject} />}
       {targetsWithEmail && selectedTemplate && emailField && subject && (
-        <SenderPreview targets={targetsWithEmail} template={selectedTemplate} />
+        <SenderPreview targets={targetsWithEmail} template={selectedTemplate} subject={subject} />
+      )}
+      {targetsWithEmail && selectedTemplate && emailField && subject && (
+        <SendAll emailField={emailField} template={selectedTemplate} targets={targetsWithEmail} subject={subject} />
       )}
     </main>
   );

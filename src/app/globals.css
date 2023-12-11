@@ -10,25 +10,8 @@ main {
   @apply mx-auto container my-10 px-5;
 }
 
-.button {
-  @apply text-gray-700 py-2 px-4 rounded-md border-2 border-gray-100 hover:bg-gray-100 flex gap-1 items-center;
-}
-
-button {
-  @apply button;
-}
-
-.button.primary,
-button.primary {
-  @apply bg-green-500 text-white hover:bg-green-600 active:bg-green-700 border-green-100;
-}
-
 input {
   @apply text-gray-700 py-2 px-4 rounded border-2 border-gray-100 focus:outline-blue-200;
-}
-
-button input {
-  @apply py-0 px-0;
 }
 
 h1,

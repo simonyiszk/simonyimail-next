@@ -6,9 +6,10 @@ import { useSendEmail } from '@/hooks/use-send-email';
 interface SingleEmailSendProps {
   to: string;
   html: string;
+  subject: string;
 }
 
-export function SingleEmailSend({ to, html }: SingleEmailSendProps) {
+export function SingleEmailSend({ to, html, subject }: SingleEmailSendProps) {
   const { isMutating, data, error, trigger, reset } = useSendEmail();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export function SingleEmailSend({ to, html }: SingleEmailSendProps) {
   }, [to]);
 
   const handleClick = () => {
-    trigger({ to, html });
+    trigger({ to, html, subject });
   };
 
   let children: ReactNode = 'Levél küldése';

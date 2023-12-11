@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb';
 
+import { Button } from '@/components/common/button';
+
 interface PaginationProps {
   startPage?: number;
   totalPages: number;
@@ -24,17 +26,17 @@ export function Pagination({ startPage, onPageChange, totalPages }: PaginationPr
   };
   return (
     <div className='flex items-center justify-between gap-3 w-full'>
-      <button onClick={handlePreviousPage}>
+      <Button onClick={handlePreviousPage}>
         <TbChevronLeft />
-      </button>
+      </Button>
       <div className='flex items-center gap-3'>
         <span>{currentPage + 1}</span>
         <span>/</span>
         <span>{totalPages}</span>
       </div>
-      <button onClick={handleNextPage}>
+      <Button onClick={handleNextPage}>
         <TbChevronRight />
-      </button>
+      </Button>
     </div>
   );
 }

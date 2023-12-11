@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { Button } from '@/components/common/button';
 import { Card } from '@/components/common/card';
 import { SheetPreview } from '@/components/flow/sheet-selector/sheet-preview';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
@@ -31,9 +32,9 @@ export function SheetSelector({ onSheetValuesSelected }: SheetSelectorProps) {
       <h2>Táblázat kiválasztása</h2>
       <div className='flex gap-3'>
         <input className='flex-1' ref={inputRef} placeholder='Azonosító' />
-        <button onClick={onSearch} className='primary'>
+        <Button onClick={onSearch} variant='primary'>
           Keresés
-        </button>
+        </Button>
       </div>
       {sheetId && <SheetPreview sheetId={sheetId} onSheetValuesSelected={handleValuesSelect} />}
     </Card>

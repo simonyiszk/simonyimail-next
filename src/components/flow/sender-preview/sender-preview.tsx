@@ -3,6 +3,7 @@ import mjml2html from 'mjml-browser';
 import { useState } from 'react';
 import { TbEye } from 'react-icons/tb';
 
+import { Button } from '@/components/common/button';
 import { Card } from '@/components/common/card';
 import { Modal } from '@/components/common/modal';
 import { Pagination } from '@/components/common/pagination';
@@ -14,14 +15,15 @@ import { replaceParams } from '@/utils/parameter.utils';
 interface SenderPreviewProps {
   targets: TargetWithEmail[];
   template: Template;
+  subject: string;
 }
 
-export function SenderPreview({ targets, template }: SenderPreviewProps) {
+export function SenderPreview({ targets, template, subject }: SenderPreviewProps) {
   const [currentTarget, setCurrentTarget] = useState(targets[0]);
   return (
     <Card>
       <h2>Előnézet és küldés</h2>
-      <TargetPreview target={currentTarget} template={template} />
+      <TargetPreview target={currentTarget} template={template} subject={subject} />
       <Pagination totalPages={targets.length} onPageChange={(page) => setCurrentTarget(targets[page])} />
     </Card>
   );
@@ -30,9 +32,10 @@ export function SenderPreview({ targets, template }: SenderPreviewProps) {
 interface TargetPreviewProps {
   target: TargetWithEmail;
   template: Template;
+  subject: string;
 }
 
-function TargetPreview({ target, template }: TargetPreviewProps) {
+function TargetPreview({ target, template, subject }: TargetPreviewProps) {
   const mjmlWithParams = replaceParams(
     template.mjml,
     Object.entries(target).map(([key, value]) => ({ key, value }))
@@ -50,15 +53,15 @@ function TargetPreview({ target, template }: TargetPreviewProps) {
       <div className='flex justify-between items-center mt-3'>
         <Modal
           button={(onOpen) => (
-            <button onClick={onOpen}>
+            <Button onClick={onOpen}>
               <TbEye /> Sablon előnézet
-            </button>
+            </Button>
           )}
         >
           asd
           {/*<EmailRenderer mjml={mjmlWithParams} />*/}
         </Modal>
-        {/*<SingleEmailSend to={target.email} html={html} />*/}
+        {/*<SingleEmailSend to={target.email} html={html} subject={subject} />*/}
       </div>
     </div>
   );
