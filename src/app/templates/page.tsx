@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import Link from 'next/link';
 import { TbCirclePlus } from 'react-icons/tb';
 
 import { Button } from '@/components/common/button';
-import { Navbar } from '@/components/navbar';
 import { TemplateListItem } from '@/components/template-list-item';
 
 const prismaClient = new PrismaClient();

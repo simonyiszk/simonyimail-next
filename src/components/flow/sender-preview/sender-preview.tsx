@@ -41,7 +41,7 @@ function TargetPreview({ target, template, subject }: TargetPreviewProps) {
     Object.entries(target).map(([key, value]) => ({ key, value }))
   );
 
-  // const html = mjml2html(mjmlWithParams).html;
+  const html = mjml2html(mjmlWithParams).html;
   return (
     <div>
       {Object.entries(target).map(([key, value]) => (
@@ -58,10 +58,9 @@ function TargetPreview({ target, template, subject }: TargetPreviewProps) {
             </Button>
           )}
         >
-          asd
-          {/*<EmailRenderer mjml={mjmlWithParams} />*/}
+          <EmailRenderer mjml={mjmlWithParams} />
         </Modal>
-        {/*<SingleEmailSend to={target.email} html={html} subject={subject} />*/}
+        <SingleEmailSend to={target.email} html={html} subject={subject} />
       </div>
     </div>
   );
