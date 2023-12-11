@@ -5,7 +5,6 @@ import { useRef } from 'react';
 
 import { Loading } from '@/components/common/loading';
 import { ErrorDisplay } from '@/components/common/status-display/error-display';
-import { Navbar } from '@/components/navbar';
 import { useCreateTemplate } from '@/hooks/use-create-template';
 
 export default function TemplateCreatePage() {
