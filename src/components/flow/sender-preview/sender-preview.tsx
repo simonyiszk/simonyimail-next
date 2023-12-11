@@ -45,7 +45,7 @@ function TargetPreview({ target, template, subject }: TargetPreviewProps) {
   return (
     <div>
       {Object.entries(target).map(([key, value]) => (
-        <div className='grid grid-cols-2 grid-rows-1 w-full border-b-2 border-slate-100 p-2' key={key}>
+        <div className='grid grid-cols-2 grid-rows-1 w-full border-b-2 border-gray-100 p-2' key={key}>
           <p className='truncate'>{key}</p>
           <p className='truncate'>{value}</p>
         </div>

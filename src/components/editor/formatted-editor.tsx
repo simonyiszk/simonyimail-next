@@ -24,7 +24,7 @@ export function FormattedEditor({ onChange, defaultValue = '' }: CodeEditorProps
   }, [codeValue, onChange]);
 
   return (
-    <div className='relative h-full overflow-hidden bg-slate-900'>
+    <div className='relative h-full overflow-hidden bg-gray-900'>
       <div className='h-full overflow-auto'>
         <CodeEditor
           value={codeValue}

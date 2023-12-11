@@ -30,7 +30,7 @@ export function EditorPage({ template }: EditorPageProps) {
             bottomChild={<ParamEditor keys={[...keys]} onChange={setParams} />}
           />
         }
-        rightChild={<EmailRenderer className='overflow-auto h-full bg-slate-50' mjml={finalMjml} />}
+        rightChild={<EmailRenderer className='overflow-auto h-full bg-gray-50' mjml={finalMjml} />}
       />
       <TemplateSaver templateId={template.id} mjml={codeValue} />
     </div>

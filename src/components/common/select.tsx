@@ -40,9 +40,9 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
             displayValue={(value: string) => options.find((option) => option.value === value)?.label ?? ''}
             onChange={(event) => setQuery(event.target.value)}
           />
-          <TbCaretUpDown className='h-5 w-5 text-slate-500' />
+          <TbCaretUpDown className='h-5 w-5 text-gray-500' />
         </Combobox.Button>
-        <Combobox.Options className='absolute top-full mt-1 right-0 shadow-md rounded-md border-2 border-slate-100 bg-slate-100 overflow-hidden gap-y-0.5 flex flex-col w-full'>
+        <Combobox.Options className='absolute top-full mt-1 right-0 shadow-md rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col w-full'>
           {filteredOptions.length === 0 && query !== '' ? (
             <div className='cursor-default select-none px-4 py-2 text-gray-700 bg-white'>Nincs találat.</div>
           ) : (
