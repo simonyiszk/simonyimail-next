@@ -12,11 +12,11 @@ import { Param } from '@/types/param.type';
 import { getParams, replaceParams } from '@/utils/parameter.utils';
 
 interface EditorPageProps {
-  template: Template;
+  template?: Template;
 }
 
 export function EditorPage({ template }: EditorPageProps) {
-  const [codeValue, setCodeValue] = useState(template.mjml);
+  const [codeValue, setCodeValue] = useState(template?.mjml ?? '');
   const [params, setParams] = useState<Param[]>([]);
   const finalMjml = useMemo(() => replaceParams(codeValue, params), [codeValue, params]);
 
@@ -35,7 +35,7 @@ export function EditorPage({ template }: EditorPageProps) {
       />
       <div className='absolute bottom-5 right-5 flex gap-5 items-center'>
         <CopyButton mjml={finalMjml} />
-        <TemplateSaver templateId={template.id} mjml={codeValue} />
+        {template && <TemplateSaver templateId={template.id} mjml={codeValue} />}
       </div>
     </div>
   );

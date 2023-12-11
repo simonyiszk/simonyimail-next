@@ -11,7 +11,13 @@ interface CopyButtonProps {
 
 export function CopyButton({ mjml }: CopyButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
-  const html = useMemo(() => mjml2html(mjml).html, [mjml]);
+  const html = useMemo(() => {
+    try {
+      return mjml2html(mjml).html;
+    } catch (e) {
+      return String(e);
+    }
+  }, [mjml]);
   const onCopy = () => {
     navigator.clipboard.writeText(html).then(() => {
       setIsCopied(true);

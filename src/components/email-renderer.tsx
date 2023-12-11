@@ -8,6 +8,12 @@ interface EmailRendererProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function EmailRenderer({ mjml, ...props }: EmailRendererProps) {
-  const html = useMemo(() => mjml2html(mjml).html, [mjml]);
+  const html = useMemo(() => {
+    try {
+      return mjml2html(mjml).html;
+    } catch (e) {
+      return String(e);
+    }
+  }, [mjml]);
   return <div {...props} dangerouslySetInnerHTML={{ __html: html }} />;
 }
