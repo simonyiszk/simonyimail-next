@@ -35,3 +35,10 @@ function parseAndValidate(body: any): EditTemplateDto {
   if (!body.mjml) throw new Error('MJML content is required');
   return { mjml: body.mjml };
 }
+
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+  const session = await getServerSession(authOptions);
+  if (!session) return UnauthorizedResponse();
+  await prismaClient.template.delete({ where: { id: params.id } });
+  return OkResponse();
+}

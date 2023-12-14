@@ -14,6 +14,7 @@ export function InternalServerErrorResponse(message: string): Response {
   return Response.json({ message }, { status: 500 });
 }
 
-export function OkResponse<T>(data: T): Response {
+export function OkResponse<T>(data?: T): Response {
+  if (!data) return new Response('', { status: 200 });
   return Response.json(data, { status: 200 });
 }

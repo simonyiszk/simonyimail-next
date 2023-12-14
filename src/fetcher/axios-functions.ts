@@ -27,3 +27,8 @@ export const axiosPut = async <TResponse, TBody>(url: string, data: { arg: TBody
   const response = await axiosService.put<TResponse>(url, data.arg);
   return response.data;
 };
+
+export const axiosDelete = async <TResponse = any>(url: string) => {
+  const response = await axiosService.delete<TResponse>(url);
+  return response.data;
+};
