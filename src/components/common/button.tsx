@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link, { LinkProps } from 'next/link';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { Loading } from '@/components/common/loading';
 
@@ -14,40 +14,44 @@ type ButtonProps = (
   className?: string;
 };
 
-export function Button({ variant, className, ...props }: ButtonProps) {
-  if ('href' in props) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant, className, ...props }: ButtonProps, ref) => {
+    if ('href' in props) {
+      return (
+        <Link
+          className={clsx(
+            'button',
+            {
+              primary: variant === 'primary',
+            },
+            className
+          )}
+          {...props}
+        />
+      );
+    }
+    const { isLoading, ...restProps } = props;
     return (
-      <Link
+      <button
         className={clsx(
-          'button',
           {
             primary: variant === 'primary',
           },
           className
         )}
-        {...props}
-      />
+        disabled={props.isLoading || props.disabled}
+        ref={ref}
+        {...restProps}
+      >
+        {isLoading && (
+          <Loading
+            className={clsx({
+              'text-white': variant === 'primary',
+            })}
+          />
+        )}
+        {props.children}
+      </button>
     );
   }
-  return (
-    <button
-      className={clsx(
-        {
-          primary: variant === 'primary',
-        },
-        className
-      )}
-      disabled={props.isLoading || props.disabled}
-      {...props}
-    >
-      {props.isLoading && (
-        <Loading
-          className={clsx({
-            'text-white': variant === 'primary',
-          })}
-        />
-      )}
-      {props.children}
-    </button>
-  );
-}
+);
