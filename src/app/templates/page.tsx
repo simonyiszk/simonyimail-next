@@ -6,6 +6,8 @@ import { TemplateListItem } from '@/components/template-list-item';
 
 const prismaClient = new PrismaClient();
 
+export const dynamic = 'force-dynamic';
+
 export default async function TemplateListPage() {
   const templates = await prismaClient.template.findMany();
   return (

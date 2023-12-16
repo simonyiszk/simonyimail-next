@@ -4,6 +4,8 @@ import { EmailRenderer } from '@/components/email-renderer';
 
 const prismaClient = new PrismaClient();
 
+export const dynamic = 'force-dynamic';
+
 export default async function TemplatePage({ params }: { params: { id: string } }) {
   const template = await prismaClient.template.findUnique({
     where: { id: params.id },
