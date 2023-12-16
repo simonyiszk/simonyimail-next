@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/config/auth.config';
 import { BadRequestResponse, OkResponse, UnauthorizedResponse } from '@/server-utils/responses';
 import { CreateTemplateDto } from '@/types/template/create-template-dto.type';
 

@@ -1,7 +1,7 @@
 import axios, { isAxiosError } from 'axios';
 import { getServerSession } from 'next-auth';
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/config/auth.config';
 import {
   BadRequestResponse,
   InternalServerErrorResponse,
