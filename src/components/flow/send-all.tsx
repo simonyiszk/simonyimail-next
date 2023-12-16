@@ -1,5 +1,4 @@
 import { Template } from '@prisma/client';
-import mjml2html from 'mjml-browser';
 import { useState } from 'react';
 
 import { Button } from '@/components/common/button';
@@ -10,6 +9,7 @@ import { WarningDisplay } from '@/components/common/status-display/warning-displ
 import { useSendEmail } from '@/hooks/use-send-email';
 import { Param } from '@/types/param.type';
 import { TargetWithEmail } from '@/types/target.type';
+import { getHtmlForMjml } from '@/utils/convert-mjml';
 import { replaceParams } from '@/utils/parameter.utils';
 
 interface SendAllProps {
@@ -64,5 +64,5 @@ function getParamsFromTarget(target: TargetWithEmail): Param[] {
 function getHtmlFromMjmlAndTarget(mjml: string, target: TargetWithEmail) {
   const params = getParamsFromTarget(target);
   const mjmlWithParams = replaceParams(mjml, params);
-  return mjml2html(mjmlWithParams).html;
+  return getHtmlForMjml(mjmlWithParams);
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import mjml2html from 'mjml-browser';
 import React, { useMemo } from 'react';
+
+import { getHtmlForMjml } from '@/utils/convert-mjml';
 
 interface EmailRendererProps extends React.HTMLAttributes<HTMLDivElement> {
   mjml: string;
@@ -9,11 +10,7 @@ interface EmailRendererProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function EmailRenderer({ mjml, ...props }: EmailRendererProps) {
   const html = useMemo(() => {
-    try {
-      return mjml2html(mjml).html;
-    } catch (e) {
-      return String(e);
-    }
+    return getHtmlForMjml(mjml);
   }, [mjml]);
   return <div {...props} dangerouslySetInnerHTML={{ __html: html }} />;
 }

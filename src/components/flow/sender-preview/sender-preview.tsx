@@ -1,6 +1,5 @@
 import { Template } from '@prisma/client';
-import mjml2html from 'mjml-browser';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { TbEye } from 'react-icons/tb';
 
 import { Button } from '@/components/common/button';
@@ -10,6 +9,7 @@ import { Pagination } from '@/components/common/pagination';
 import { EmailRenderer } from '@/components/email-renderer';
 import { SingleEmailSend } from '@/components/flow/sender-preview/single-email-send';
 import { TargetWithEmail } from '@/types/target.type';
+import { getHtmlForMjml } from '@/utils/convert-mjml';
 import { replaceParams } from '@/utils/parameter.utils';
 
 interface SenderPreviewProps {
@@ -41,7 +41,7 @@ function TargetPreview({ target, template, subject }: TargetPreviewProps) {
     Object.entries(target).map(([key, value]) => ({ key, value }))
   );
 
-  const html = mjml2html(mjmlWithParams).html;
+  const html = useMemo(() => getHtmlForMjml(mjmlWithParams), [mjmlWithParams]);
   return (
     <div>
       {Object.entries(target).map(([key, value]) => (

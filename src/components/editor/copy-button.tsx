@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import mjml2html from 'mjml-browser';
 import { useMemo, useState } from 'react';
 import { TbCheck, TbCopy } from 'react-icons/tb';
 
 import { Button } from '@/components/common/button';
+import { getHtmlForMjml } from '@/utils/convert-mjml';
 
 interface CopyButtonProps {
   mjml: string;
@@ -12,11 +12,7 @@ interface CopyButtonProps {
 export function CopyButton({ mjml }: CopyButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
   const html = useMemo(() => {
-    try {
-      return mjml2html(mjml).html;
-    } catch (e) {
-      return String(e);
-    }
+    return getHtmlForMjml(mjml);
   }, [mjml]);
   const onCopy = () => {
     navigator.clipboard.writeText(html).then(() => {
