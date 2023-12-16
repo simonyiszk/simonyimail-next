@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <title>Simonyimail</title>
         <meta name='description' content='E-mail sablon készítő és levélküldő munkafolyam webalkalmazás' />
       </head>
-      <SessionProvider session={null}>
+      <SessionProvider>
         <body className={inter.className}>
           <Navbar />
           {children}
