@@ -12,7 +12,7 @@ main {
 
 .button,
 button {
-  @apply text-gray-700 py-2 px-4 rounded-md border-2 border-gray-100 hover:bg-gray-100 flex justify-center gap-1 items-center disabled:cursor-not-allowed disabled:opacity-50;
+  @apply text-gray-700 py-2 px-4 rounded-md border-2 border-gray-100 hover:bg-gray-100 flex justify-center gap-1 items-center disabled:cursor-not-allowed disabled:opacity-50 truncate overflow-hidden;
 }
 
 .button.primary,
