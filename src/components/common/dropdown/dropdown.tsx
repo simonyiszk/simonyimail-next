@@ -14,10 +14,11 @@ export function Dropdown({ button, children }: DropdownProps) {
             <Menu.Button as='div' className='cursor-pointer'>
               {button}
             </Menu.Button>
-            <Menu.Items static={open}>
-              <div className='absolute shadow-md mt-1 top-full right-0 rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col outline-none'>
-                {children}
-              </div>
+            <Menu.Items
+              className='absolute shadow-md mt-1 top-full right-0 rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col z-10 outline-none'
+              static={open}
+            >
+              {children}
             </Menu.Items>
           </>
         )}
