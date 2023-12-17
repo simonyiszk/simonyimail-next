@@ -36,7 +36,7 @@ export function SheetSelector({ onTargetsSelected }: SheetSelectorProps) {
   return (
     <Card>
       <h2>Táblázat kiválasztása</h2>
-      <div className='flex gap-3'>
+      <div className='flex gap-3 max-w-full overflow-hidden flex-wrap'>
         <input className='flex-1' ref={inputRef} placeholder='Azonosító' />
         <Button onClick={onSearch} variant='primary'>
           Keresés

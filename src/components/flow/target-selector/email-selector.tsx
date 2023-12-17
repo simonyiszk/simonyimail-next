@@ -18,7 +18,7 @@ export function EmailSelector({ onTargetsSelected }: EmailSelectorProps) {
   return (
     <Card>
       <h2>Közvetlen e-mail cím megadása</h2>
-      <div className='flex gap-3'>
+      <div className='flex gap-3 max-w-full overflow-hidden flex-wrap'>
         <input name='email' type='email' className='flex-1' ref={inputRef} />
         <button className='primary' onClick={onSubmit}>
           Hozzáadás
