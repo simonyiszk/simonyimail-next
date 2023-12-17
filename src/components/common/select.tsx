@@ -42,7 +42,7 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
           />
           <TbCaretUpDown className='h-5 w-5 text-gray-500' />
         </Combobox.Button>
-        <Combobox.Options className='absolute top-full mt-1 right-0 shadow-md rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col w-full'>
+        <Combobox.Options className='absolute top-full mt-1 right-0 shadow-md rounded-md border-2 border-gray-100 bg-gray-100 overflow-hidden gap-y-0.5 flex flex-col w-full z-10'>
           {filteredOptions.length === 0 && query !== '' ? (
             <div className='cursor-default select-none px-4 py-2 text-gray-700 bg-white'>Nincs találat.</div>
           ) : (

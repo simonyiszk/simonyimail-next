@@ -1,7 +1,7 @@
 import { Loading } from '@/components/common/loading';
 import { ErrorDisplay } from '@/components/common/status-display/error-display';
 import { SuccessDisplay } from '@/components/common/status-display/success-display';
-import { SheetHeaders } from '@/components/flow/sheet-selector/sheet-headers';
+import { SheetHeaders } from '@/components/flow/target-selector/sheet-selector/sheet-headers';
 import { useSpreadsheet } from '@/hooks/use-spreadsheet';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 

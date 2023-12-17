@@ -10,11 +10,12 @@ import { SuccessDisplay } from '@/components/common/status-display/success-displ
 import { WarningDisplay } from '@/components/common/status-display/warning-display';
 import { useTemplates } from '@/hooks/use-templates';
 import { Target } from '@/types/target.type';
+import { compareParamsWithColumns } from '@/utils/compare.utils';
 import { getParams } from '@/utils/parameter.utils';
 
 interface TemplateSelectorProps {
   targets: Target[];
-  onSelectedTemplate: (template: Template) => void;
+  onSelectedTemplate: (template?: Template) => void;
 }
 
 export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelectorProps) {
@@ -36,6 +37,8 @@ export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelect
   useEffect(() => {
     if (selectedTemplate && difference?.remainingParams.length === 0) {
       onSelectedTemplate(selectedTemplate);
+    } else {
+      onSelectedTemplate();
     }
   }, [selectedTemplate, difference, onSelectedTemplate]);
 
@@ -46,12 +49,12 @@ export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelect
       {error && <ErrorDisplay text={error.message ?? 'Hiba történt'} />}
       {options && <Select options={options} onChange={setSelectedTemplateId} />}
       {difference && difference.remainingParams.length === 0 && (
-        <SuccessDisplay text='A táblázat tartalmazza az összes paramétert' />
+        <SuccessDisplay text='A forrás tartalmazza az összes paramétert' />
       )}
       {difference && difference.remainingParams.length > 0 && (
         <ErrorDisplay>
           <div className='flex gap-1 flex-wrap'>
-            <p>A táblázat nem tartalmazza a következő paramétereket:</p>
+            <p>A forrás nem tartalmazza a következő paramétereket:</p>
             {difference.remainingParams.map((param) => (
               <Chip key={param}>{param}</Chip>
             ))}
@@ -61,7 +64,7 @@ export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelect
       {difference && difference.remainingColumns.length > 0 && (
         <WarningDisplay>
           <div className='flex gap-1 flex-wrap'>
-            <p>A táblázat tartalmaz oszlopokat, amelyek nem szerepelnek a sablonban:</p>
+            <p>A forrás tartalmaz mezőket, amelyek nem szerepelnek a sablonban:</p>
             {difference.remainingColumns.map((column) => (
               <Chip key={column}>{column}</Chip>
             ))}
@@ -70,16 +73,4 @@ export function TemplateSelector({ targets, onSelectedTemplate }: TemplateSelect
       )}
     </Card>
   );
-}
-
-function compareParamsWithColumns(params: string[], columns: string[]) {
-  const remainingParams = [...params];
-  const remainingColumns = [...columns];
-  params.forEach((param) => {
-    if (remainingColumns.includes(param)) {
-      remainingParams.splice(remainingParams.indexOf(param), 1);
-      remainingColumns.splice(remainingColumns.indexOf(param), 1);
-    }
-  });
-  return { remainingParams, remainingColumns };
 }

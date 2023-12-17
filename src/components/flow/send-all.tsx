@@ -14,12 +14,11 @@ import { replaceParams } from '@/utils/parameter.utils';
 
 interface SendAllProps {
   subject: string;
-  emailField: string;
   template: Template;
   targets: TargetWithEmail[];
 }
 
-export function SendAll({ emailField, template, targets, subject }: SendAllProps) {
+export function SendAll({ template, targets, subject }: SendAllProps) {
   const { trigger } = useSendEmail();
   const [isInProgress, setIsInProgress] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
@@ -44,8 +43,7 @@ export function SendAll({ emailField, template, targets, subject }: SendAllProps
       <h2>Összes küldése</h2>
       <WarningDisplay>
         <p>
-          A(z) <b>{emailField}</b> oszlopban található címekre fogja elküldeni a leveleket, összesen{' '}
-          <b>{targets.length}</b> darabot.
+          A(z)Összesen <b>{targets.length}</b> darab levelet fog elküldeni.
         </p>
       </WarningDisplay>
       {completedCount > 0 && <SuccessDisplay text={`Elküldve ${completedCount} db`} />}
