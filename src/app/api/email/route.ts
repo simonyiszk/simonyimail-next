@@ -1,6 +1,7 @@
 import axios, { isAxiosError } from 'axios';
 import { getServerSession } from 'next-auth';
 import quotedPrintable from 'quoted-printable';
+import utf8 from 'utf8';
 
 import { authOptions } from '@/config/auth.config';
 import {
@@ -32,6 +33,7 @@ export async function POST(req: Request) {
     );
     return OkResponse(response.data);
   } catch (e) {
+    console.log(e);
     if (isAxiosError(e)) {
       console.log(e.response?.data);
       return Response.json({ error: e.message }, { status: e.response?.status ?? 500 });
@@ -48,7 +50,7 @@ function parseAndValidate(body: object): SendEmailDto {
 }
 
 function composeEmail(to: string, html: string, subject: string) {
-  const subjectEncoded = quotedPrintable.encode(subject);
+  const subjectEncoded = `=?UTF-8?Q?${quotedPrintable.encode(utf8.encode(subject))}?=\n\n`;
   const emailBody = `To: ${to}\nSubject: ${subjectEncoded}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
   return Buffer.from(emailBody).toString('base64');
 }

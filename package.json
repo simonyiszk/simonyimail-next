@@ -25,13 +25,15 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "swr": "^2.2.4",
-    "tailwind-merge": "^2.1.0"
+    "tailwind-merge": "^2.1.0",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/quoted-printable": "^1.0.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/utf8": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
