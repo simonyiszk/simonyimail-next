@@ -1,7 +1,6 @@
 import axios, { isAxiosError } from 'axios';
 import { getServerSession } from 'next-auth';
-import quotedPrintable from 'quoted-printable';
-import utf8 from 'utf8';
+import MailComposer from 'nodemailer/lib/mail-composer';
 
 import { authOptions } from '@/config/auth.config';
 import {
@@ -22,9 +21,10 @@ export async function POST(req: Request) {
     return BadRequestResponse(JSON.stringify(e.message));
   }
   try {
+    const raw = await composeEmail(body.to, body.html, body.subject);
     const response = await axios.post<unknown>(
       'https://gmail.googleapis.com/gmail/v1/users/me/messages/send/',
-      { raw: composeEmail(body.to, body.html, body.subject) },
+      { raw },
       {
         headers: {
           Authorization: `Bearer ${(session as any).accessToken}`,
@@ -49,8 +49,12 @@ function parseAndValidate(body: object): SendEmailDto {
   return body as SendEmailDto;
 }
 
-function composeEmail(to: string, html: string, subject: string) {
-  const subjectEncoded = `=?UTF-8?Q?${quotedPrintable.encode(utf8.encode(subject))}?=\n\n`;
-  const emailBody = `To: ${to}\nSubject: ${subjectEncoded}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
-  return Buffer.from(emailBody).toString('base64');
+async function composeEmail(to: string, html: string, subject: string) {
+  const mailComposer = new MailComposer({
+    to,
+    subject,
+    html,
+  });
+  const message = await mailComposer.compile().build();
+  return Buffer.from(message).toString('base64');
 }
