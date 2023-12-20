@@ -1,5 +1,6 @@
 import axios, { isAxiosError } from 'axios';
 import { getServerSession } from 'next-auth';
+import quotedPrintable from 'quoted-printable';
 
 import { authOptions } from '@/config/auth.config';
 import {
@@ -47,6 +48,7 @@ function parseAndValidate(body: object): SendEmailDto {
 }
 
 function composeEmail(to: string, html: string, subject: string) {
-  const emailBody = `To: ${to}\nSubject: ${subject}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
+  const subjectEncoded = quotedPrintable.encode(subject);
+  const emailBody = `To: ${to}\nSubject: ${subjectEncoded}\nContent-Type: text/html; charset="UTF-8"\n\n${html}`;
   return Buffer.from(emailBody).toString('base64');
 }
