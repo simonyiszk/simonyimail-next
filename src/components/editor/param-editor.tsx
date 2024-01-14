@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Param } from '@/types/param.type';
 
@@ -31,20 +31,18 @@ export function ParamEditor({ keys, onChange }: ParamEditorProps) {
       {params.length === 0 && (
         <p className='text-opacity-50'>Adj a kódhoz paramétereket dupla kapcsos zárójelekkel: {'{{parameter}}'}</p>
       )}
-      <div className='gap-3 columns-2'>
-        {params.map((param) => (
-          <Fragment key={param.key}>
-            <label htmlFor={param.key + '-input'}>{param.key}</label>
-            <input
-              id={param.key + '-input'}
-              type='text'
-              value={param.value}
-              className='w-full'
-              onChange={(e) => setParam(param.key, e.target.value)}
-            />
-          </Fragment>
-        ))}
-      </div>
+      {params.map((param) => (
+        <div className='gap-3 columns-2' key={param.key}>
+          <label htmlFor={param.key + '-input'}>{param.key}</label>
+          <input
+            id={param.key + '-input'}
+            type='text'
+            value={param.value}
+            className='w-full'
+            onChange={(e) => setParam(param.key, e.target.value)}
+          />
+        </div>
+      ))}
     </div>
   );
 }
