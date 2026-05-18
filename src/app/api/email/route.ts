@@ -56,5 +56,5 @@ async function composeEmail(to: string, html: string, subject: string) {
     html,
   });
   const message = await mailComposer.compile().build();
-  return Buffer.from(message).toString('base64');
+  return Buffer.from(message).toString('base64url');
 }
