@@ -36,7 +36,7 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
       <div className='relative'>
         <Combobox.Button className='flex items-center w-full hover:bg-white'>
           <Combobox.Input
-            className='flex-1 border-none outline-none bg-transparent focus:outline-none'
+            className='flex-1 border-none outline-hidden bg-transparent focus:outline-hidden'
             displayValue={(value: string) => options.find((option) => option.value === value)?.label ?? ''}
             onChange={(event) => setQuery(event.target.value)}
           />

@@ -1,4 +1,4 @@
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import useSWRMutation from 'swr/mutation';
 
 import { axiosPut } from '@/fetcher/axios-functions';

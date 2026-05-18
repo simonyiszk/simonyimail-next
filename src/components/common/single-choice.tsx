@@ -25,7 +25,7 @@ export function SingleChoice<T extends string>({ options, onOptionSelected }: Si
         <button
           key={value}
           className={clsx('flex flex-1 items-center justify-center px-4 py-2 rounded-full border-none', {
-            'bg-white shadow-sm': selected === value,
+            'bg-white shadow-xs': selected === value,
           })}
           style={{ color: selected === value ? color : undefined }}
           onClick={() => setSelected(value)}

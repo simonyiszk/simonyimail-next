@@ -5,12 +5,13 @@ import { authOptions } from '@/config/auth.config';
 import { InternalServerErrorResponse, OkResponse, UnauthorizedResponse } from '@/server-utils/responses';
 import { SpreadsheetValues } from '@/types/spreadsheet-values.type';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session) return UnauthorizedResponse();
   try {
     const response = await axios.get<SpreadsheetValues>(
-      'https://sheets.googleapis.com/v4/spreadsheets/' + params.id + '/values/A1%3AZ1000',
+      'https://sheets.googleapis.com/v4/spreadsheets/' + id + '/values/A1%3AZ1000',
       {
         headers: {
           Authorization: `Bearer ${(session as any).accessToken}`,

@@ -1,6 +1,6 @@
 'use client';
 
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { HTMLAttributes } from 'react';
@@ -24,7 +24,7 @@ export function TemplateListItem({ template }: TemplateListItemProps) {
   };
   return (
     <Link href={`/templates/${template.id}`}>
-      <div className='bg-white rounded-lg shadow-sm w-60 h-20 hover:shadow-lg transition-shadow flex justify-between items-center p-5'>
+      <div className='bg-white rounded-lg shadow-xs w-60 h-20 hover:shadow-lg transition-shadow flex justify-between items-center p-5'>
         <p className='text-center truncate'>{template.name}</p>
         <Dropdown
           button={

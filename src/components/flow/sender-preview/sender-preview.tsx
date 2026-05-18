@@ -1,4 +1,4 @@
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import { useMemo, useState } from 'react';
 import { TbEye } from 'react-icons/tb';
 

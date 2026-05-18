@@ -1,0 +1,15 @@
+import { PrismaPg } from '@prisma/adapter-pg';
+
+import { PrismaClient } from '../../prisma/generated/client';
+
+const adapter = new PrismaPg({
+  connectionString: process.env.POSTGRES_URL_NON_POOLING!,
+});
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

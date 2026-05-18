@@ -1,15 +1,13 @@
-import { PrismaClient } from '@prisma/client';
 import { TbCirclePlus } from 'react-icons/tb';
 
 import { Button } from '@/components/common/button';
 import { TemplateListItem } from '@/components/template-list-item';
-
-const prismaClient = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
 
 export default async function TemplateListPage() {
-  const templates = await prismaClient.template.findMany();
+  const templates = await prisma.template.findMany();
   return (
     <main className='mx-auto container mt-10'>
       <div className='flex gap-5 items-center'>

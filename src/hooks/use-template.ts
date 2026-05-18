@@ -1,4 +1,4 @@
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import useSWR from 'swr';
 
 import { axiosGet } from '@/fetcher/axios-functions';

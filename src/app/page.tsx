@@ -1,6 +1,6 @@
 'use client';
 
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import { useEffect, useState } from 'react';
 
 import { SendAll } from '@/components/flow/send-all';

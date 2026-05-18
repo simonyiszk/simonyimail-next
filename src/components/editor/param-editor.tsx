@@ -29,7 +29,7 @@ export function ParamEditor({ keys, onChange }: ParamEditorProps) {
   return (
     <div className='h-full overflow-y-auto p-2'>
       {params.length === 0 && (
-        <p className='text-opacity-50'>Adj a kódhoz paramétereket dupla kapcsos zárójelekkel: {'{{parameter}}'}</p>
+        <p className='opacity-50'>Adj a kódhoz paramétereket dupla kapcsos zárójelekkel: {'{{parameter}}'}</p>
       )}
       {params.map((param) => (
         <div className='gap-3 columns-2' key={param.key}>

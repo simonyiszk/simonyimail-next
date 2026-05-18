@@ -1,4 +1,4 @@
-import { Template } from '@prisma/client';
+import { Template } from '@prisma/generated';
 import { useEffect, useMemo, useState } from 'react';
 
 import { Card } from '@/components/common/card';
