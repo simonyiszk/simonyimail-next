@@ -14,7 +14,7 @@ export function TargetSelector({ onTargetSelected }: TargetSelectorProps) {
   const [mode, setMode] = useState<'sheet' | 'email'>('sheet');
   useEffect(() => {
     onTargetSelected();
-  }, [mode]);
+  }, [mode, onTargetSelected]);
   return (
     <>
       <SingleChoice

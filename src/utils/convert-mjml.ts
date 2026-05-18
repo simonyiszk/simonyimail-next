@@ -1,12 +1,10 @@
-export function getHtmlForMjml(mjml: string): string {
+export async function getHtmlForMjml(mjml: string): Promise<string> {
   if (typeof window !== 'undefined') {
-    try {
-      const mjml2html = require('mjml-browser');
-      return mjml2html(mjml).html;
-    } catch (e) {
-      return String(e);
-    }
+    console.log('hello');
+    return await import('mjml-browser')
+      .then((mjmlBrowser) => mjmlBrowser.default(mjml).html)
+      .catch(() => 'MJML converter error');
   } else {
-    return 'MJML converter error';
+    return 'This was rendered on the server side somehow, this is an error.';
   }
 }

@@ -1,3 +1,4 @@
+'use client';
 import { Template } from '@prisma/generated';
 import { useMemo, useState } from 'react';
 
@@ -15,7 +16,7 @@ interface EditorPageProps {
   template?: Template;
 }
 
-export function EditorPage({ template }: EditorPageProps) {
+export default function EditorPage({ template }: EditorPageProps) {
   const [codeValue, setCodeValue] = useState(template?.mjml ?? '');
   const [params, setParams] = useState<Param[]>([]);
   const finalMjml = useMemo(() => replaceParams(codeValue, params), [codeValue, params]);

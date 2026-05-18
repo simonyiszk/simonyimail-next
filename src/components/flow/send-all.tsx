@@ -28,11 +28,12 @@ export function SendAll({ template, targets, subject }: SendAllProps) {
     setCompletedCount(0);
     setErrorCount(0);
     for (const target of targets) {
-      const html = getHtmlFromMjmlAndTarget(template.mjml, target);
+      const html = await getHtmlFromMjmlAndTarget(template.mjml, target);
       try {
         await trigger({ html, to: target.email, subject });
         setCompletedCount((v) => v + 1);
       } catch (e) {
+        console.error(e);
         setErrorCount((v) => v + 1);
       }
     }
@@ -43,7 +44,7 @@ export function SendAll({ template, targets, subject }: SendAllProps) {
       <h2>Összes küldése</h2>
       <WarningDisplay>
         <p>
-          A(z)Összesen <b>{targets.length}</b> darab levelet fog elküldeni.
+          Összesen <b>{targets.length}</b> darab levelet fog elküldeni.
         </p>
       </WarningDisplay>
       {completedCount > 0 && <SuccessDisplay text={`Elküldve ${completedCount} db`} />}

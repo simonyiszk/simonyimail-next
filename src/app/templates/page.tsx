@@ -7,9 +7,9 @@ import { prisma } from '@/lib/prisma';
 export const dynamic = 'force-dynamic';
 
 export default async function TemplateListPage() {
-  const templates = await prisma.template.findMany();
+  const templates = await prisma.template.findMany({ orderBy: { updatedAt: 'desc' } });
   return (
-    <main className='mx-auto container mt-10'>
+    <main className='mx-auto mt-10'>
       <div className='flex gap-5 items-center'>
         <h2>Sablonok</h2>
         <Button variant='primary' href='/templates/new'>

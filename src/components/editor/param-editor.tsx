@@ -24,6 +24,7 @@ export function ParamEditor({ keys, onChange }: ParamEditorProps) {
     const newParams = keys
       .filter((key) => !params.map((param) => param.key).includes(key))
       .map((key) => ({ key, value: '' }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParams([...existingParams, ...newParams]);
   }, [keys]);
   return (

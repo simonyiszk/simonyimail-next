@@ -18,7 +18,7 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
   const filteredOptions =
     query === '' ? options : options.filter((option) => option.label.toLowerCase().includes(query.toLowerCase()));
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string | null) => {
     const selectedOption = options.find((option) => option.value === value);
     if (!selectedOption) return;
     setQuery('');
@@ -27,8 +27,10 @@ export function Select({ options, onChange, defaultValue }: SelectProps) {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelected(defaultValue ?? options[0]);
     onChange(defaultValue ? defaultValue.value : options[0].value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

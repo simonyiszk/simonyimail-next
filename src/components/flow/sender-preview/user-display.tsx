@@ -13,6 +13,7 @@ export function UserDisplay() {
   const { data, update } = useSession();
   useEffect(() => {
     update();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (!data?.user) return <Button onClick={() => signIn('google')}>Bejelentkezés</Button>;
   return (

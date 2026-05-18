@@ -15,16 +15,18 @@ export default function MainPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template>();
   const [subject, setSubject] = useState<string>();
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedTemplate(undefined);
     setSubject(undefined);
   }, [targetsWithEmail]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSubject(undefined);
   }, [selectedTemplate]);
 
   return (
-    <main className='max-w-xl w-full flex flex-col gap-5'>
+    <div className='mt-10 mx-auto max-w-md w-full flex flex-col gap-5'>
       <TargetSelector onTargetSelected={setTargetsWithEmail} />
       {targetsWithEmail && <TemplateSelector targets={targetsWithEmail} onSelectedTemplate={setSelectedTemplate} />}
       {targetsWithEmail && selectedTemplate && <SubjectInput onChange={setSubject} />}
@@ -34,6 +36,6 @@ export default function MainPage() {
       {targetsWithEmail && selectedTemplate && subject && (
         <SendAll template={selectedTemplate} targets={targetsWithEmail} subject={subject} />
       )}
-    </main>
+    </div>
   );
 }

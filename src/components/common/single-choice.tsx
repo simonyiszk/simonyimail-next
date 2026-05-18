@@ -20,11 +20,11 @@ export function SingleChoice<T extends string>({ options, onOptionSelected }: Si
     onOptionSelected(selected);
   }, [selected]);
   return (
-    <div className='flex bg-gray-50 shadow-md border-2 border-gray-50 rounded-full justify-evenly gap-1'>
+    <div className='flex bg-gray-50 shadow-md border-2 border-gray-50 rounded-md justify-evenly gap-1'>
       {options.map(({ icon: Icon, color, label, value }) => (
         <button
           key={value}
-          className={clsx('flex flex-1 items-center justify-center px-4 py-2 rounded-full border-none', {
+          className={clsx('flex flex-1 items-center justify-center px-4 py-2 border-none', {
             'bg-white shadow-xs': selected === value,
           })}
           style={{ color: selected === value ? color : undefined }}

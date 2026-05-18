@@ -14,8 +14,8 @@ export function CopyButton({ mjml }: CopyButtonProps) {
   const html = useMemo(() => {
     return getHtmlForMjml(mjml);
   }, [mjml]);
-  const onCopy = () => {
-    navigator.clipboard.writeText(html).then(() => {
+  const onCopy = async () => {
+    navigator.clipboard.writeText(await html).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1000);
     });

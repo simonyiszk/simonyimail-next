@@ -5,7 +5,7 @@ import { useSendEmail } from '@/hooks/use-send-email';
 
 interface SingleEmailSendProps {
   to: string;
-  html: string;
+  html: Promise<string>;
   subject: string;
 }
 
@@ -16,8 +16,8 @@ export function SingleEmailSend({ to, html, subject }: SingleEmailSendProps) {
     reset();
   }, [to]);
 
-  const handleClick = () => {
-    trigger({ to, html, subject });
+  const handleClick = async () => {
+    void trigger({ to, html: await html, subject });
   };
 
   let children: ReactNode = 'Levél küldése';
