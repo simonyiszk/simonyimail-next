@@ -5,19 +5,20 @@ import { useSendEmail } from '@/hooks/use-send-email';
 
 interface SingleEmailSendProps {
   to: string;
+  from: string;
   html: Promise<string>;
   subject: string;
 }
 
-export function SingleEmailSend({ to, html, subject }: SingleEmailSendProps) {
+export function SingleEmailSend({ to, from, html, subject }: SingleEmailSendProps) {
   const { isMutating, data, error, trigger, reset } = useSendEmail();
 
   useEffect(() => {
     reset();
-  }, [to]);
+  }, [to, from, subject]);
 
   const handleClick = async () => {
-    void trigger({ to, html: await html, subject });
+    void trigger({ to, from, html: await html, subject });
   };
 
   let children: ReactNode = 'Levél küldése';
@@ -29,8 +30,13 @@ export function SingleEmailSend({ to, html, subject }: SingleEmailSendProps) {
     children = 'Sikertelen';
   }
   return (
-    <button disabled={isMutating || typeof data !== 'undefined'} className='primary' onClick={handleClick}>
-      {children}
-    </button>
+    <div className='flex flex-col items-end gap-1'>
+      <button disabled={isMutating || typeof data !== 'undefined'} className='primary' onClick={handleClick}>
+        {children}
+      </button>
+      {error && (
+        <p className='text-red-500 text-xs text-right max-w-xs'>{error.response?.data?.error || error.message}</p>
+      )}
+    </div>
   );
 }

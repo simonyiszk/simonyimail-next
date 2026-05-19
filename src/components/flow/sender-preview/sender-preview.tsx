@@ -16,14 +16,15 @@ interface SenderPreviewProps {
   targets: TargetWithEmail[];
   template: Template;
   subject: string;
+  senderName: string;
 }
 
-export function SenderPreview({ targets, template, subject }: SenderPreviewProps) {
+export function SenderPreview({ targets, template, subject, senderName }: SenderPreviewProps) {
   const [currentTarget, setCurrentTarget] = useState(targets[0]);
   return (
     <Card>
       <h2>Előnézet és küldés</h2>
-      <TargetPreview target={currentTarget} template={template} subject={subject} />
+      <TargetPreview target={currentTarget} template={template} subject={subject} senderName={senderName} />
       <Pagination totalPages={targets.length} onPageChange={(page) => setCurrentTarget(targets[page])} />
     </Card>
   );
@@ -33,9 +34,10 @@ interface TargetPreviewProps {
   target: TargetWithEmail;
   template: Template;
   subject: string;
+  senderName: string;
 }
 
-function TargetPreview({ target, template, subject }: TargetPreviewProps) {
+function TargetPreview({ target, template, subject, senderName }: TargetPreviewProps) {
   const mjmlWithParams = replaceParams(
     template.mjml,
     Object.entries(target).map(([key, value]) => ({ key, value }))
@@ -60,7 +62,7 @@ function TargetPreview({ target, template, subject }: TargetPreviewProps) {
         >
           <EmailRenderer mjml={mjmlWithParams} />
         </Modal>
-        <SingleEmailSend to={target.email} html={html} subject={subject} />
+        <SingleEmailSend to={target.email} html={html} subject={subject} from={senderName} />
       </div>
     </div>
   );

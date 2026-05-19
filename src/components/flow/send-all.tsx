@@ -14,27 +14,29 @@ import { replaceParams } from '@/utils/parameter.utils';
 
 interface SendAllProps {
   subject: string;
+  senderName: string;
   template: Template;
   targets: TargetWithEmail[];
 }
 
-export function SendAll({ template, targets, subject }: SendAllProps) {
+export function SendAll({ template, targets, subject, senderName }: SendAllProps) {
   const { trigger } = useSendEmail();
   const [isInProgress, setIsInProgress] = useState(false);
   const [completedCount, setCompletedCount] = useState(0);
-  const [errorCount, setErrorCount] = useState(0);
+  const [errors, setErrors] = useState<{ email: string; message: string }[]>([]);
+
   const onSendAll = async () => {
     setIsInProgress(true);
     setCompletedCount(0);
-    setErrorCount(0);
+    setErrors([]);
     for (const target of targets) {
       const html = await getHtmlFromMjmlAndTarget(template.mjml, target);
       try {
-        await trigger({ html, to: target.email, subject });
+        await trigger({ html, to: target.email, subject, from: senderName });
         setCompletedCount((v) => v + 1);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
-        setErrorCount((v) => v + 1);
+        setErrors((v) => [...v, { email: target.email, message: e.response?.data?.error || e.message }]);
       }
     }
     setIsInProgress(false);
@@ -48,7 +50,11 @@ export function SendAll({ template, targets, subject }: SendAllProps) {
         </p>
       </WarningDisplay>
       {completedCount > 0 && <SuccessDisplay text={`Elküldve ${completedCount} db`} />}
-      {errorCount > 0 && <ErrorDisplay text={`Sikertelen ${errorCount} db`} />}
+      {errors.length > 0 && (
+        <ErrorDisplay
+          text={`Sikertelen ${errors.length} db: ${errors.map((e) => `${e.email}: ${e.message}`).join(', ')}`}
+        />
+      )}
       <Button variant='primary' isLoading={isInProgress} onClick={onSendAll}>
         Küldés
       </Button>

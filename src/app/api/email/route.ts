@@ -21,7 +21,8 @@ export async function POST(req: Request) {
     return BadRequestResponse(JSON.stringify(e.message));
   }
   try {
-    const raw = await composeEmail(body.to, body.html, body.subject);
+    const from = body.from || 'me';
+    const raw = await composeEmail(body.to, body.html, body.subject, from);
     const response = await axios.post<unknown>(
       'https://gmail.googleapis.com/gmail/v1/users/me/messages/send/',
       { raw },
@@ -36,22 +37,26 @@ export async function POST(req: Request) {
     console.log(e);
     if (isAxiosError(e)) {
       console.log(e.response?.data);
-      return Response.json({ error: e.message }, { status: e.response?.status ?? 500 });
+      return Response.json(
+        { error: e.response?.data?.error?.message || e.message },
+        { status: e.response?.status ?? 500 }
+      );
     }
     return InternalServerErrorResponse(JSON.stringify(e));
   }
 }
 
-function parseAndValidate(body: object): SendEmailDto {
+function parseAndValidate(body: any): SendEmailDto {
   if (!body.hasOwnProperty('to')) throw new Error('Missing to');
   if (!body.hasOwnProperty('html')) throw new Error('Missing html');
   if (!body.hasOwnProperty('subject')) throw new Error('Missing subject');
   return body as SendEmailDto;
 }
 
-async function composeEmail(to: string, html: string, subject: string) {
+async function composeEmail(to: string, html: string, subject: string, from?: string) {
   const mailComposer = new MailComposer({
     to,
+    from,
     subject,
     html,
   });
